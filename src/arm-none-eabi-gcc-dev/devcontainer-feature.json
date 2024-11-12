@@ -1,0 +1,43 @@
+{
+    "name": "Embedded ARM Development",
+    "id": "arm-none-eabi-gcc-dev",
+    "version": "0.0.1",
+    "description": "Arm GNU Toolchain w/ Make, CMake, & Ninja",
+    "options": {
+        "arm-none-eabi-gcc-version": {
+            "type": "string",
+            "proposals": [
+                "system"
+            ],
+            "default": "system",
+            "description": "Select or enter the Arm GNU Toolchain version."
+        },
+        "make-version": {
+            "type": "string",
+            "proposals": [
+                "system"
+            ],
+            "default": "system",
+            "description": "Select or enter the Make version."
+        },
+        "cmake-version": {
+            "type": "string",
+            "proposals": [
+                "system"
+            ],
+            "default": "system",
+            "description": "Select or enter the CMake version."
+        },
+        "ninja-version": {
+            "type": "string",
+            "proposals": [
+                "system"
+            ],
+            "default": "system",
+            "description": "Select or enter the Ninja version."
+        }
+    },
+    "installsAfter": [
+        "ghcr.io/devcontainers/features/common-utils"
+    ]
+}

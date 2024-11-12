@@ -1,0 +1,19 @@
+{
+    "arm_cppcheck_eo_ubuntu": {
+        "image": "ubuntu:latest",
+        "features": {
+            "arm-none-eabi-gcc-dev": {},
+            "cppcheck": {},
+            "eo" : {}
+        }
+    },
+    "arm_cppcheck_eo_alpine": {
+        "image": "alpine:latest",
+        "features": {
+            "ghcr.io/devcontainers/features/common-utils:2": {},
+            "arm-none-eabi-gcc-dev": {},
+            "cppcheck": {},
+            "eo" : {}
+        }
+    }
+}

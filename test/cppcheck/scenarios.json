@@ -1,0 +1,23 @@
+{
+    "ubuntu": {
+        "image": "ubuntu:latest",
+        "features": {
+            "cppcheck": {}
+        }
+    },
+    "alpine": {
+        "image": "alpine:latest",
+        "features": {
+            "ghcr.io/devcontainers/features/common-utils:2": {},
+            "cppcheck": {}
+        }
+    },
+    "versioned": {
+        "image": "ubuntu:latest",
+        "features": {
+            "cppcheck": {
+                "version": "2.16.0"
+            }
+        }
+    }
+}

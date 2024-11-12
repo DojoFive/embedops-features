@@ -1,0 +1,21 @@
+{
+    "ubuntu": {
+        "image": "ubuntu:latest",
+        "features": {
+            "arm-none-eabi-gcc-dev": {}
+        }
+    },
+    "debian": {
+        "image": "debian:latest",
+        "features": {
+            "arm-none-eabi-gcc-dev": {}
+        }
+    },
+    "alpine": {
+        "image": "alpine:latest",
+        "features": {
+            "ghcr.io/devcontainers/features/common-utils:2": {},
+            "arm-none-eabi-gcc-dev": {}
+        }
+    }
+}

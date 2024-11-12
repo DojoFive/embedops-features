@@ -1,0 +1,21 @@
+{
+    "name": "Cppcheck",
+    "id": "cppcheck",
+    "version": "0.0.1",
+    "description": "Install cppcheck tooling",
+    "options": {
+        "version": {
+            "type": "string",
+            "proposals": [
+                "latest",
+                "system",
+                "os-provided"
+            ],
+            "default": "os-provided",
+            "description": "Select or enter a Cppcheck version."
+        }
+    },
+    "installsAfter": [
+        "ghcr.io/devcontainers/features/common-utils"
+    ]
+}
