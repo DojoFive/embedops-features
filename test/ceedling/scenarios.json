@@ -1,0 +1,15 @@
+{
+    "ubuntu": {
+        "image": "ubuntu:latest",
+        "features": {
+            "ceedling": {}
+        }
+    },
+    "alpine": {
+        "image": "alpine:latest",
+        "features": {
+            "ghcr.io/devcontainers/features/common-utils:2": {},
+            "ceedling": {}
+        }
+    }
+}
