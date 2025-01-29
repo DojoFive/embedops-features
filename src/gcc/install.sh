@@ -114,6 +114,7 @@ export DEBIAN_FRONTEND=noninteractive
 if [ "${VERSION_SPECIFIED}" = "latest" ]; then
     check_packages gcc \
     binutils \
+    libc6-dev \
     make
 else
     echo "At the moment, this feature does not support specifying a version number."
