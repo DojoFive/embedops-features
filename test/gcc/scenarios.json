@@ -1,0 +1,21 @@
+{
+    "ubuntu": {
+        "image": "ubuntu:latest",
+        "features": {
+            "gcc": {}
+        }
+    },
+    "debian": {
+        "image": "debian:latest",
+        "features": {
+            "gcc": {}
+        }
+    },
+    "alpine": {
+        "image": "alpine:latest",
+        "features": {
+            "ghcr.io/devcontainers/features/common-utils:2": {},
+            "gcc": {}
+        }
+    }
+}

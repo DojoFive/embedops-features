@@ -1,0 +1,19 @@
+{
+    "name": "GCC",
+    "id": "gcc",
+    "version": "1.0.0",
+    "description": "Install GCC",
+    "options": {
+        "version": {
+            "type": "string",
+            "proposals": [
+                "latest"
+            ],
+            "default": "latest",
+            "description": "Select or enter a GCC version."
+        }
+    },
+    "installsAfter": [
+        "ghcr.io/devcontainers/features/common-utils"
+    ]
+}
