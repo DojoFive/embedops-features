@@ -1,0 +1,14 @@
+{
+    "ubuntu": {
+        "image": "ubuntu:latest",
+        "features": {
+            "zephyr-dev": {}
+        }
+    },
+    "debian": {
+        "image": "debian:latest",
+        "features": {
+            "zephyr-dev": {}
+        }
+    }
+}

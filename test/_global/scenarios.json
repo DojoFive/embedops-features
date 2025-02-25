@@ -1,19 +1,21 @@
 {
-    "arm_cppcheck_eo_ubuntu": {
+    "arm_cppcheck_eo_ceedling_ubuntu": {
         "image": "ubuntu:latest",
         "features": {
             "arm-none-eabi-gcc-dev": {},
             "cppcheck": {},
-            "eo" : {}
+            "eo" : {},
+            "ceedling": {}
         }
     },
-    "arm_cppcheck_eo_alpine": {
+    "arm_cppcheck_eo_ceedling_alpine": {
         "image": "alpine:latest",
         "features": {
             "ghcr.io/devcontainers/features/common-utils:2": {},
             "arm-none-eabi-gcc-dev": {},
             "cppcheck": {},
-            "eo" : {}
+            "eo" : {},
+            "ceedling": {}
         }
     }
 }
