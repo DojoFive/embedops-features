@@ -122,7 +122,7 @@ export DEBIAN_FRONTEND=noninteractive
 
 # TODO: allow user to specify version and script will then pull from source (or possibly from XPack if version available)
 # each tool should have its own .sh script that this script can call
-if [[ "$ARM_NONE_EABI_GCC_VERSION" != "system" ]] || [[ "$NINJA_VERSION" != "system" ]] || [[ "$CMAKE_VERSION" != "system" ]] || [[ "$CMAKE_VERSION" != "system" ]]; then
+if [[ "$ARM_NONE_EABI_GCC_VERSION" != "system" ]] || [[ "$NINJA_VERSION" != "system" ]] || [[ "$CMAKE_VERSION" != "system" ]] || [[ "$MAKE_VERSION" != "system" ]]; then
     echo "At the moment, this feature does not support specifying a version number."
     exit 1
 else

@@ -1,0 +1,19 @@
+{
+  "name": "Zephyr Development",
+  "id": "zephyr-dev",
+  "version": "0.0.1",
+  "description": "Zephyr Development",
+  "options": {
+    "zephyr-sdk-version": {
+      "type": "string",
+      "proposals": [
+        "0.16.6"
+      ],
+      "default": "0.16.6",
+      "description": "Select or enter the Zephyr SDK Version"
+    }
+  },
+  "installsAfter": [
+    "ghcr.io/devcontainers/features/common-utils"
+  ]
+}

@@ -16,6 +16,9 @@ jobs:
           - eo
           - arm-none-eabi-gcc-dev
           - cppcheck
+          # - ceedling
+          - gcc
+          - zephyr-dev
         baseImage:
           - debian:latest
           - ubuntu:latest
@@ -38,6 +41,9 @@ jobs:
           - eo
           - arm-none-eabi-gcc-dev
           - cppcheck
+          - ceedling
+          # - gcc
+          - zephyr-dev
     steps:
       - uses: actions/checkout@v4
 
