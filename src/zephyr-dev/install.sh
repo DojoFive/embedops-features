@@ -111,7 +111,7 @@ initialize_zephyr_project() {
 
     cd "${ZEPHYR_PROJECT_DIR}" || { echo "Error: Zephyr project directory not found."; exit 1; }
 
-    west update
+    west update --narrow -o=--depth=1 zephyr
     west zephyr-export
 
     "${VIRTUAL_ENV}/bin/pip" install --no-cache-dir -r zephyr/scripts/requirements.txt || { echo "Error: Failed to install Zephyr dependencies."; exit 1; }
