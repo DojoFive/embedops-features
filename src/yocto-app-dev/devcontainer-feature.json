@@ -1,0 +1,11 @@
+{
+  "name": "Yocto Application Development",
+  "id": "yocto-app-dev",
+  "version": "0.0.1",
+  "description": "Yocto Application Development",
+  "installsAfter": [
+    "ghcr.io/devcontainers/features/common-utils"
+  ],
+  "onCreateCommand": "yocto-setup.sh",
+  "postAttachCommand": "yocto-sdk-check.sh"
+}
