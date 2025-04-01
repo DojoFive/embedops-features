@@ -16,6 +16,7 @@ Zephyr Development
 | Options Id | Description | Type | Default Value |
 |-----|-----|-----|-----|
 | zephyr-sdk-version | Select or enter the Zephyr SDK Version | string | 0.16.6 |
+| runOnCreateCommand | Whether to run onCreateCommand logic | boolean | true |
 
 
 
