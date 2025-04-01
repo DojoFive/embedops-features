@@ -11,6 +11,9 @@ source dev-container-features-test-lib
 ./create-project.sh
 cd zephyr_blinky_project
 
+# simulate onCreateCommand
+/usr/local/bin/update-west-workspaces.sh
+
 # Feature-specific tests
 # The 'check' command comes from the dev-container-features-test-lib. Syntax is...
 # check <LABEL> <cmd> [args...]

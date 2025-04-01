@@ -2,13 +2,17 @@
     "ubuntu": {
         "image": "ubuntu:latest",
         "features": {
-            "zephyr-dev": {}
+            "zephyr-dev": {
+                "runOnCreateCommand": false
+            }
         }
     },
     "debian": {
         "image": "debian:latest",
         "features": {
-            "zephyr-dev": {}
+            "zephyr-dev": {
+                "runOnCreateCommand": false
+            }
         }
     }
 }

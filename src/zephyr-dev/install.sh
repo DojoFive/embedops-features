@@ -19,6 +19,10 @@ check_packages() {
     apt-get install -y --no-install-recommends "$@"
 }
 
+clean_up() {
+    rm -rf /var/lib/apt/lists/*
+}
+
 # Determine system architecture and store it in a variable
 case "$(uname -m)" in
     x86_64)
@@ -43,7 +47,7 @@ install_python_and_dependencies() {
     fi
 
 
-    check_packages wget git python3 python3-pip python3-venv python3-dev cmake ninja-build gperf device-tree-compiler xz-utils
+    check_packages wget git python3 python3-pip python3-venv python3-dev cmake ninja-build gperf device-tree-compiler openssh-client xz-utils ccache
 }
 
 install_zephyr_sdk() {
@@ -97,24 +101,9 @@ setup_zephyr_venv() {
     echo "Installing west and setuptools in virtual environment..."
 
     "${VIRTUAL_ENV}/bin/pip" install --no-cache-dir --upgrade pip setuptools west || { echo "Error: Failed to install dependencies in venv."; exit 1; }
-}
 
-initialize_zephyr_project() {
-    echo "Initializing Zephyr project..."
-
-    local ZEPHYR_PROJECT_DIR="/opt/zephyrproject"
-
-    if [[ ! -d "${ZEPHYR_PROJECT_DIR}/zephyr" ]]; then
-        echo "Cloning Zephyr repository and modules..."
-        west init -m https://github.com/zephyrproject-rtos/zephyr.git "${ZEPHYR_PROJECT_DIR}" || { echo "Error: Failed to initialize Zephyr repository."; exit 1; }
-    fi
-
-    cd "${ZEPHYR_PROJECT_DIR}" || { echo "Error: Zephyr project directory not found."; exit 1; }
-
-    west update --narrow -o=--depth=1 zephyr
-    west zephyr-export
-
-    "${VIRTUAL_ENV}/bin/pip" install --no-cache-dir -r zephyr/scripts/requirements.txt || { echo "Error: Failed to install Zephyr dependencies."; exit 1; }
+    # allow any user to access zephyr environment
+    chmod -R 777 /opt/zephyrproject
 }
 
 persist_zephyr_env() {
@@ -131,16 +120,24 @@ EOL
     chmod +x /etc/profile.d/zephyr.sh
 }
 
+persist_update_west_workspace() {
+    echo "Persisting update-west-workspaces.sh script in /usr/local/bin"
+    mkdir -p /usr/local/bin
+    sed -i 's/<value>/'"$RUNONCREATECOMMAND"'/g' update-west-workspaces.sh
+    cp update-west-workspaces.sh /usr/local/bin
+}
+
 main() {
     echo "Starting Zephyr installation process..."
     pkg_mgr_update
     install_python_and_dependencies
     install_zephyr_sdk
     setup_zephyr_venv
-    initialize_zephyr_project
     persist_zephyr_env
+    persist_update_west_workspace
 
     echo "Zephyr installation process completed successfully."
+    clean_up
 }
 
-main "$@"
+main

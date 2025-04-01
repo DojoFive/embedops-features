@@ -18,7 +18,8 @@ jobs:
           - cppcheck
           # - ceedling
           - gcc
-          - zephyr-dev
+          # skipping zephyr-dev due to hard requirement of an existing west-workspace 
+          # - zephyr-dev
         baseImage:
           - debian:latest
           - ubuntu:latest
