@@ -1,7 +1,7 @@
 {
     "name": "Cppcheck",
     "id": "cppcheck",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "Install cppcheck tooling",
     "options": {
         "version": {
@@ -17,5 +17,13 @@
     },
     "installsAfter": [
         "ghcr.io/devcontainers/features/common-utils"
-    ]
+    ],
+    "dependsOn": {
+        "ghcr.io/devcontainers/features/python:1": {
+            "installTools": false
+        },
+        "ghcr.io/rocker-org/devcontainer-features/apt-packages:1": {
+            "packages": "python3-pygments"
+        }
+    }
 }

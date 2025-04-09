@@ -7,15 +7,5 @@
             "eo" : {},
             "ceedling": {}
         }
-    },
-    "arm_cppcheck_eo_ceedling_alpine": {
-        "image": "alpine:latest",
-        "features": {
-            "ghcr.io/devcontainers/features/common-utils:2": {},
-            "arm-none-eabi-gcc-dev": {},
-            "cppcheck": {},
-            "eo" : {},
-            "ceedling": {}
-        }
     }
 }

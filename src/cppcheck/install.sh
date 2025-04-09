@@ -305,6 +305,7 @@ cd build
 cmake ..
 cmake --build .
 make install
+cp ../htmlreport/cppcheck-htmlreport /usr/local/bin/cppcheck-htmlreport
 
 # git_options=("prefix=/usr/local")
 # git_options+=("sysconfdir=/etc")
