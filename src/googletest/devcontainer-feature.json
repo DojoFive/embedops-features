@@ -1,0 +1,11 @@
+{
+    "name": "Googletest Dependencies",
+    "id": "googletest",
+    "version": "0.0.1",
+    "description": "Install Dependencies for Googletest",
+    "options": {
+    },
+    "installsAfter": [
+        "ghcr.io/devcontainers/features/common-utils"
+    ]
+}
