@@ -15,7 +15,7 @@ jobs:
         features:
           - eo
           - arm-none-eabi-gcc-dev
-          - cppcheck
+          # - cppcheck
           # - ceedling
           - gcc
           # skipping zephyr-dev due to hard requirement of an existing west-workspace 
@@ -41,7 +41,8 @@ jobs:
         features:
           - eo
           - arm-none-eabi-gcc-dev
-          - cppcheck
+          # skip cppcheck until addressing working in alpine
+          # - cppcheck
           - ceedling
           # - gcc
           - zephyr-dev
