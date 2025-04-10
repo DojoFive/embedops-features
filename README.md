@@ -1,1 +1,1 @@
-# EmbedOps Dev Container Features: Self Authoring Template
+# EmbedOps Dev Container Features
