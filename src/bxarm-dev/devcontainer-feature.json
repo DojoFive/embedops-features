@@ -1,0 +1,30 @@
+{
+  "name": "BXARM Development",
+  "id": "bxarm-dev",
+  "version": "0.0.1",
+  "description": "BXARM Development",
+  "installsAfter": [
+    "ghcr.io/devcontainers/features/common-utils"
+  ],
+  "options": {
+    "yq-version": {
+      "type": "string",
+      "proposals": [
+        "4.35.1"
+      ],
+      "default": "4.35.1",
+      "description": "Select or enter the YQ version"
+    },
+    "bxarm-deb-path": {
+      "type": "string",
+      "description": "Enter the BXARM .deb path",
+      "default": ""
+    },
+    "iar-license-server": {
+      "type": "string",
+      "description": "Enter your IAR license server address",
+      "default": ""
+    }
+  },
+  "onCreateCommand": "/bin/bash /usr/local/bin/bxarm-setup.sh"
+}

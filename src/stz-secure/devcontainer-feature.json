@@ -1,0 +1,25 @@
+{
+  "name": "Stz Secure Development",
+  "id": "stz-secure",
+  "version": "0.0.1",
+  "description": "Stz Secure Development",
+  "installsAfter": [
+    "ghcr.io/devcontainers/features/common-utils"
+  ],
+  "options": {
+    "yq-version": {
+      "type": "string",
+      "proposals": [
+        "4.35.1"
+      ],
+      "default": "4.35.1",
+      "description": "Select or enter the YQ version"
+    },
+    "stz-secure-deb-path": {
+      "type": "string",
+      "description": "Enter the Stz Secure .deb path",
+      "default": ""
+    }
+  },
+  "onCreateCommand": "/bin/bash /usr/local/bin/stz-secure-setup.sh"
+}
