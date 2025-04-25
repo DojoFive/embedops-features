@@ -1,7 +1,7 @@
 {
   "name": "Zephyr Development",
   "id": "zephyr-dev",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Zephyr Development",
   "options": {
     "zephyr-sdk-version": {
@@ -21,5 +21,5 @@
   "installsAfter": [
     "ghcr.io/devcontainers/features/common-utils"
   ],
-  "onCreateCommand": "ON_CREATE_COMMAND=true update-west-workspaces.sh"
+  "onCreateCommand": "ON_CREATE_COMMAND=true update-west-workspaces.sh 2>/dev/null || true"
 }
