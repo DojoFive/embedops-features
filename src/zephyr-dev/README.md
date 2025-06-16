@@ -7,7 +7,7 @@ Zephyr Development
 
 ```json
 "features": {
-    "ghcr.io/DojoFive/embedops-features/zephyr-dev:0": {}
+    "ghcr.io/DojoFive/embedops-features/zephyr-dev:1": {}
 }
 ```
 
@@ -17,6 +17,8 @@ Zephyr Development
 |-----|-----|-----|-----|
 | zephyr-sdk-version | Select or enter the Zephyr SDK Version | string | 0.16.6 |
 | runOnCreateCommand | Whether to run onCreateCommand logic | boolean | true |
+| rust-support | Whether to add rust support to the project | boolean | false |
+| zephyr-toolchain | Enter the Zephyr toolchain | string | arm-zephyr-eabi |
 
 
 

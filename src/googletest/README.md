@@ -7,7 +7,7 @@ Install Dependencies for Googletest
 
 ```json
 "features": {
-    "ghcr.io/DojoFive/embedops-features/googletest:0": {}
+    "ghcr.io/DojoFive/embedops-features/googletest:1": {}
 }
 ```
 
@@ -15,7 +15,7 @@ Install Dependencies for Googletest
 
 | Options Id | Description | Type | Default Value |
 |-----|-----|-----|-----|
-
+| code-coverage | Whether to add code coverage support to the project | boolean | false |
 
 
 
