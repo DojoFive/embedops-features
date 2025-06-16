@@ -1,19 +1,24 @@
 {
-    "name": "Ceedling",
-    "id": "ceedling",
-    "version": "1.0.0",
-    "description": "Install Ceedling",
-    "options": {
-        "version": {
-            "type": "string",
-            "proposals": [
-                "latest"
-            ],
-            "default": "latest",
-            "description": "Select or enter a Ceedling version."
-        }
+  "name": "Ceedling",
+  "id": "ceedling",
+  "version": "1.1.0",
+  "description": "Install Ceedling",
+  "options": {
+    "version": {
+      "type": "string",
+      "proposals": [
+        "latest"
+      ],
+      "default": "latest",
+      "description": "Select or enter a Ceedling version."
     },
-    "installsAfter": [
-        "ghcr.io/devcontainers/features/common-utils"
-    ]
+    "code-coverage": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether to add code coverage support to the project"
+    }
+  },
+  "installsAfter": [
+    "ghcr.io/devcontainers/features/common-utils"
+  ]
 }
