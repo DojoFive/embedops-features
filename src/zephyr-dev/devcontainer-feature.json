@@ -1,7 +1,7 @@
 {
   "name": "Zephyr Development",
   "id": "zephyr-dev",
-  "version": "0.0.4",
+  "version": "1.0.0",
   "description": "Zephyr Development",
   "options": {
     "zephyr-sdk-version": {
@@ -16,6 +16,16 @@
       "type": "boolean",
       "default": true,
       "description": "Whether to run onCreateCommand logic"
+    },
+    "rust-support": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether to add rust support to the project"
+    },
+    "zephyr-toolchain": {
+      "type": "string",
+      "default": "arm-zephyr-eabi",
+      "description": "Enter the Zephyr toolchain"
     }
   },
   "installsAfter": [

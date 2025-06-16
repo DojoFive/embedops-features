@@ -40,12 +40,13 @@ esac
 install_python_and_dependencies() {
     echo "Installing Python dependencies for Debian..."
 
-    # Install `build-essential` only if the architecture is aarch64
-    if [[ "${ARCH}" == "aarch64" ]]; then
+    if [[ "${RUST_SUPPORT}" == "true" ]]; then
+        echo "Rust support enabled."
+        check_packages build-essential curl clang libclang-dev
+    elif [[ "${ARCH}" == "aarch64" ]]; then
         echo "Detected architecture: aarch64. Installing 'build-essential'."
         check_packages build-essential
     fi
-
 
     check_packages wget git python3 python3-pip python3-venv python3-dev cmake ninja-build gperf device-tree-compiler openssh-client xz-utils ccache
 }
@@ -72,7 +73,7 @@ install_zephyr_sdk() {
         exit 1
     fi
 
-    "${INSTALL_DIR}/setup.sh" -c -t arm-zephyr-eabi
+    "${INSTALL_DIR}/setup.sh" -c -t "$ZEPHYR_TOOLCHAIN"
 
     echo 'export ZEPHYR_TOOLCHAIN_VARIANT=zephyr' >> /etc/profile
     echo "export ZEPHYR_SDK_INSTALL_DIR=${INSTALL_DIR}" >> /etc/profile
@@ -102,9 +103,23 @@ setup_zephyr_venv() {
 
     "${VIRTUAL_ENV}/bin/pip" install --no-cache-dir --upgrade pip setuptools west || { echo "Error: Failed to install dependencies in venv."; exit 1; }
 
+    if [[ "${RUST_SUPPORT}" == "true" ]]; then
+        echo "Rust support enabled. Installing 'pyelftools'."
+        "${VIRTUAL_ENV}/bin/pip" install --no-cache-dir --upgrade pyelftools || { echo "Error: Failed to install dependencies in venv."; exit 1; }
+    fi
+
     # allow any user to access zephyr environment
     chmod -R 777 /opt/zephyrproject
 }
+
+install_rust_if_needed() {
+    if [[ "${RUST_SUPPORT}" == "true" ]]; then
+        echo "Installing Rust..."
+        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y || { echo "Error installing Rust."; exit 1; }
+        export PATH="$HOME/.cargo/bin:$PATH"
+    fi
+}
+
 
 persist_zephyr_env() {
     echo "Persisting Zephyr environment in /etc/profile.d/zephyr.sh..."
@@ -116,6 +131,12 @@ export PATH="\$VIRTUAL_ENV/bin:\$PATH"
 export ZEPHYR_TOOLCHAIN_VARIANT=zephyr
 export ZEPHYR_SDK_INSTALL_DIR=/opt/zephyr-sdk
 EOL
+
+    if [[ "${RUST_SUPPORT}" == "true" ]]; then
+      echo "Persisting Rust..."
+      echo "export RUST_SUPPORT=\"${RUST_SUPPORT}\"" >> /etc/profile.d/zephyr.sh
+      echo 'export PATH="$HOME/.cargo/bin:$PATH"' >> /etc/profile.d/zephyr.sh
+    fi
 
     chmod +x /etc/profile.d/zephyr.sh
 }
@@ -133,6 +154,7 @@ main() {
     install_python_and_dependencies
     install_zephyr_sdk
     setup_zephyr_venv
+    install_rust_if_needed
     persist_zephyr_env
     persist_update_west_workspace
 
