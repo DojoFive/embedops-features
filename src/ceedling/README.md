@@ -16,6 +16,7 @@ Install Ceedling
 | Options Id | Description | Type | Default Value |
 |-----|-----|-----|-----|
 | version | Select or enter a Ceedling version. | string | latest |
+| code-coverage | Whether to add code coverage support to the project | boolean | false |
 
 
 
