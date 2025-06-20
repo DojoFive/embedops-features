@@ -147,6 +147,7 @@ build_with_bxarm() {
                   ielftool --srec "$file" "${file%.*}.srec"
                   ielftool --bin "$file" "${file%.*}.bin"
               done
+              set -eE  # revert so build errors are caught
           fi
       done
       rm "$IAR_CONFIG_PATH"
