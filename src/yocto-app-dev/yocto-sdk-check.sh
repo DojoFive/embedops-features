@@ -8,11 +8,17 @@ YOCTO_SDK_ENV_DIR="${YOCTO_SDK_DIR}/${YOCTO_SDK_SUBDIR}"
 
 checksum_file="${YOCTO_SDK_DIR}/.yocto_sdk_extracted"
 
-
+run_yocto_setup() {
+    if [ "$(id -u)" -ne 0 ]; then
+        exec sudo yocto-setup.sh
+    else
+        exec yocto-setup.sh
+    fi
+}
 
 if [ ! -d "$YOCTO_SDK_ENV_DIR" ]; then
     rm -f $checksum_file
-    exec yocto-setup.sh
+    run_yocto_setup
 fi
 
 if [ -f "$checksum_file" ]; then
@@ -23,7 +29,11 @@ if [ -f "$checksum_file" ]; then
         exit 0
     else
         echo "Tarball has changed. Removing old directory and re-extracting."
-        rm -rf "$checksum_file" "$YOCTO_SDK_ENV_DIR"
-        exec yocto-setup.sh
+        if [ "$(id -u)" -ne 0 ]; then
+            sudo rm -rf "$checksum_file" "$YOCTO_SDK_ENV_DIR"
+        else
+            rm -rf "$checksum_file" "$YOCTO_SDK_ENV_DIR"
+        fi
+        run_yocto_setup
     fi
 fi
