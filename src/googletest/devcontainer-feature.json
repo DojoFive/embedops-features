@@ -1,7 +1,7 @@
 {
 	"name": "Googletest Dependencies",
 	"id": "googletest",
-	"version": "1.0.0",
+	"version": "1.1.0",
 	"description": "Install Dependencies for Googletest",
 	"options": {
 		"code-coverage": {

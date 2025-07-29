@@ -53,7 +53,6 @@ clean_up() {
             ;;
     esac
 }
-clean_up
 
 pkg_mgr_update() {
     if [ ${INSTALL_CMD} = "apt-get" ]; then
@@ -107,6 +106,40 @@ check_packages() {
     fi
 }
 
+setup_gcovr_venv() {
+    echo "Setting up Gcovr Python Virtual Environment..."
+    local VENV_DIR="/opt/gcovr/.venv"
+
+    mkdir -p /opt/gcovr
+
+    # Create venv
+    if [[ ! -f "${VENV_DIR}/bin/activate" ]]; then
+        echo "Creating Python virtual environment at ${VENV_DIR}..."
+        python3 -m venv "${VENV_DIR}" || { echo "Error: Failed to create Python venv."; exit 1; }
+    fi
+
+    export VIRTUAL_ENV="${VENV_DIR}"
+    export PATH="${VENV_DIR}/bin:${PATH}"
+
+    echo "Virtual environment configured: VIRTUAL_ENV=${VIRTUAL_ENV}"
+    echo "Installing gcovr in virtual environment..."
+
+    "${VIRTUAL_ENV}/bin/pip" install --no-cache-dir --upgrade pip gcovr || { echo "Error: Failed to install dependencies in venv."; exit 1; }
+
+    echo "Persisting Gcovr environment in /etc/profile.d/gcovr.sh..."
+
+    cat <<EOL > /etc/profile.d/gcovr.sh
+# Gcovr Environment
+export VIRTUAL_ENV=/opt/gcovr/.venv
+export PATH="\$VIRTUAL_ENV/bin:\$PATH"
+EOL
+
+    chmod +x /etc/profile.d/gcovr.sh
+
+    # allow any user to access gcovr environment
+    chmod -R 777 /opt/gcovr
+}
+
 export DEBIAN_FRONTEND=noninteractive
 
 
@@ -116,6 +149,15 @@ check_packages \
     g++ \
     git \
     make
+
+if [ "${CODE_COVERAGE}" = "true" ]; then
+    if [ "${ADJUSTED_ID}" = "debian" ]; then
+        check_packages python3 python3-pip python3-setuptools python3-venv
+    else
+        check_packages python3 python3-pip python3-setuptools
+    fi
+    setup_gcovr_venv
+fi
 
 clean_up
 exit 0
