@@ -1,7 +1,7 @@
 {
     "name": "EmbedOps CLI",
     "id": "eo",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "Install the EmbedOps CLI",
     "options": {
         "version": {
