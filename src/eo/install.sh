@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-EMBEDOPS_VERSION_SPECIFIED=${VERSION}
+set -Eeo pipefail
+
+EMBEDOPS_VERSION_SPECIFIED="${VERSION:-latest}"
 
 # Bring in ID, ID_LIKE, VERSION_ID, VERSION_CODENAME
 . /etc/os-release
@@ -113,11 +115,55 @@ export DEBIAN_FRONTEND=noninteractive
 
 check_packages curl ca-certificates bash-completion xdg-utils
 
+echo "Installing EmbedOps CLI..."
+
 if [ "${EMBEDOPS_VERSION_SPECIFIED}" = "latest" ]; then
-    curl -fsSL https://gitlab.com/embedops-public/embedops-cli/-/raw/main/install.sh | BIN_DIR=/usr/bin sh
+    tmp_installer="$(mktemp)"
+    trap 'rm -f "$tmp_installer"' EXIT
+    if ! curl -fsSL -o "$tmp_installer" https://gitlab.com/embedops-public/embedops-cli/-/raw/main/install.sh; then
+        echo "❌ Failed to download EmbedOps CLI installer (latest)"
+        exit 1
+    fi
+    if ! BIN_DIR=/usr/bin sh "$tmp_installer"; then
+        echo "❌ Failed to install EmbedOps CLI (latest version)"
+        echo "This could be due to:"
+        echo "  - Network connectivity issues"
+        echo "  - Package not available for your architecture ($(uname -m))"
+        echo "  - GitLab package registry issues"
+        exit 1
+    fi
 else
-    curl -fsSL https://gitlab.com/embedops-public/embedops-cli/-/raw/main/install.sh | BIN_DIR=/usr/bin EMBEDOPS_VERSION=${EMBEDOPS_VERSION_SPECIFIED} sh
+    tmp_installer="$(mktemp)"
+    trap 'rm -f "$tmp_installer"' EXIT
+    if ! curl -fsSL -o "$tmp_installer" https://gitlab.com/embedops-public/embedops-cli/-/raw/main/install.sh; then
+        echo "❌ Failed to download EmbedOps CLI installer (${EMBEDOPS_VERSION_SPECIFIED})"
+        exit 1
+    fi
+    if ! BIN_DIR=/usr/bin EMBEDOPS_VERSION="${EMBEDOPS_VERSION_SPECIFIED}" sh "$tmp_installer"; then
+        echo "❌ Failed to install EmbedOps CLI version ${EMBEDOPS_VERSION_SPECIFIED}"
+        echo "This could be due to:"
+        echo "  - Version ${EMBEDOPS_VERSION_SPECIFIED} does not exist"
+        echo "  - Network connectivity issues"
+        echo "  - Package not available for your architecture ($(uname -m))"
+        echo "  - GitLab package registry issues"
+        exit 1
+    fi
 fi
+
+if ! command -v eo >/dev/null 2>&1; then
+    echo "❌ EmbedOps CLI installation failed - 'eo' command not found in PATH"
+    echo "The installation script completed but the binary is not accessible."
+    exit 1
+fi
+
+if ! eo version >/dev/null 2>&1; then
+    echo "❌ EmbedOps CLI installation failed - 'eo version' command failed"
+    echo "The binary was installed but is not functioning correctly."
+    exit 1
+fi
+
+echo "✅ EmbedOps CLI installed successfully"
+eo version
 
 echo 'source /etc/bash_completion' >> /root/.bashrc
 mkdir -p /root/.local/share/bash-completion/completions
