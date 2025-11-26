@@ -71,7 +71,7 @@ manifest:
   projects:
     - name: zephyr
       url: https://github.com/zephyrproject-rtos/zephyr
-      revision: v3.7.0
+      revision: v4.3.0
       import: true
 EOF
 
