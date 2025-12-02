@@ -15,7 +15,7 @@ Zephyr Development
 
 | Options Id | Description | Type | Default Value |
 |-----|-----|-----|-----|
-| zephyr-sdk-version | Select or enter the Zephyr SDK Version | string | 0.16.6 |
+| zephyr-sdk-version | Select or enter the Zephyr SDK Version | string | 0.17.4 |
 | runOnCreateCommand | Whether to run onCreateCommand logic | boolean | true |
 | rust-support | Whether to add rust support to the project | boolean | false |
 | zephyr-toolchain | Enter the Zephyr toolchain | string | arm-zephyr-eabi |
