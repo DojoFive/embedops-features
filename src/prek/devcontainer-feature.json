@@ -1,0 +1,21 @@
+{
+  "name": "prek",
+  "id": "prek",
+  "version": "1.0.0",
+  "description": "prek",
+  "options": {
+    "prek-version": {
+      "type": "string",
+      "proposals": [
+        "latest",
+        "v0.2.22"
+      ],
+      "default": "latest",
+      "description": "Select or enter the Prek Version"
+    },
+  },
+  "installsAfter": [
+    "ghcr.io/devcontainers/features/common-utils",
+    "ghcr.io/devcontainers/features/docker-in-docker"
+  ]
+}

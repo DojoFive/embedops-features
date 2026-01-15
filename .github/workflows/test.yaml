@@ -20,6 +20,7 @@ jobs:
           - gcc
           # skipping zephyr-dev due to hard requirement of an existing west-workspace 
           # - zephyr-dev
+          - prek
         baseImage:
           - debian:latest
           - ubuntu:latest
@@ -46,6 +47,7 @@ jobs:
           - ceedling
           # - gcc
           - zephyr-dev
+          - prek
     steps:
       - uses: actions/checkout@v4
 
